@@ -1,5 +1,5 @@
-import { FormControl, FormLabel, Input, FormErrorMessage, HStack, Textarea, Button, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Box, FormControl, FormLabel, Input, FormErrorMessage, HStack, Textarea, Button, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { encode } from '../../business/functions/encode'
 
@@ -27,6 +27,13 @@ const createFormData = (data: FormValues): FormSubmitData => {
 export const ContactForm = () => {
   const [isLoading, setLoading] = useState<boolean>(false)
   const [submitMessage, setSubmitMessage] = useState<string | null>(null)
+
+  useEffect(() => {
+    const { searchParams } = new URL(window.location.toString())
+    const success = searchParams.get('success') || ''
+    console.log(success)
+    searchParams.delete('success')
+  }, [])
 
   const {
     register,
@@ -61,32 +68,49 @@ export const ContactForm = () => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} name='contact' method='POST' data-netlify='true' data-netlify-honeypot='bot-field' action='/'>
-        {submitMessage && <Text color='web.primary'>{submitMessage}</Text>}
-        <HStack>
-          <FormControl isRequired paddingBottom='10px'>
-            <FormLabel>First Name</FormLabel>
-            <Input type='text' {...register('firstName')} color='white' />
-          </FormControl>
-          <FormControl isRequired paddingBottom='10px'>
-            <FormLabel>Last Name</FormLabel>
-            <Input type='text' {...register('lastName')} color='white' />
-          </FormControl>
-        </HStack>
-        <FormControl isRequired paddingBottom='10px'>
-          <FormLabel>Email Address</FormLabel>
-          <Input type='email' {...register('email')} color='white' />
-        </FormControl>
-        <FormControl isRequired paddingBottom='10px'>
-          <FormLabel>Message</FormLabel>
-          <Textarea type='text' {...register('message')} color='white' />
-          {errors.message && <FormErrorMessage>{errors.message.message}</FormErrorMessage>}
-        </FormControl>
+    <Box>
+      <form name='contact' action='/' method='POST' data-netlify='true'>
+        <input type='hidden' name='form-name' value='contact' />
+        <p>
+          <label htmlFor='name'>Name:</label>
+          <input type='text' name='name' id='name' required />
+        </p>
+        <p>
+          <label htmlFor='email'>Email: </label> <input type='email' name='email' id='email' required />
+        </p>
+        <p>
+          <label htmlFor='message'>Message: </label>
+          <textarea name='message' id='message' required></textarea>
+        </p>
         <Button type='submit' isLoading={isLoading} loadingText='Submitting' color='white'>
           Submit
         </Button>
+        <style jsx>{`
+          label {
+            font-size: 1rem;
+            color: #fff;
+          }
+          input,
+          textarea {
+            width: 100%;
+            height: 40px;
+            border: none;
+            font-size: 1rem;
+            border-radius: 5px;
+            padding-left: 5px;
+          }
+          textarea {
+            height: 80px;
+          }
+          input:focus,
+          textarea:focus {
+            outline: none;
+          }
+          p {
+            padding-bottom: 10px;
+          }
+        `}</style>
       </form>
-    </>
+    </Box>
   )
 }

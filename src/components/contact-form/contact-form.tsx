@@ -37,7 +37,7 @@ export const ContactForm = () => {
 
   const onSubmit = (data: FormValues, e: any) => {
     setLoading(true)
-    const values = createFormData
+    const values = createFormData(data)
     e.preventDefault()
     fetch('/', {
       method: 'POST',

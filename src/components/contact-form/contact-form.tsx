@@ -37,13 +37,14 @@ export const ContactForm = () => {
 
   const onSubmit = (data: FormValues, e: any) => {
     setLoading(true)
-    e.preventDefault()
     const values = createFormData
+    e.preventDefault()
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
-        ...data
+        'form-name': 'contact',
+        ...values
       })
     })
       .then((response) => {
@@ -63,7 +64,6 @@ export const ContactForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} name='contact' method='POST' data-netlify='true' data-netlify-honeypot='bot-field' action='/'>
-        <input type='hidden' name='form-name' value='contact' />
         {submitMessage && <Text color='web.primary'>{submitMessage}</Text>}
         <HStack>
           <FormControl isInvalid={!!errors.firstName} isRequired paddingBottom='10px'>

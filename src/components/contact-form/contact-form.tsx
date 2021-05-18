@@ -51,7 +51,6 @@ export const ContactForm = () => {
         reset()
         setLoading(false)
         setSubmitMessage('Thank you, we will be in touch')
-        console.log(response)
       })
       .catch((error) => {
         reset()
@@ -66,50 +65,20 @@ export const ContactForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} name='contact' method='POST' data-netlify='true' data-netlify-honeypot='bot-field' action='/'>
         {submitMessage && <Text color='web.primary'>{submitMessage}</Text>}
         <HStack>
-          <FormControl isInvalid={!!errors.firstName} isRequired paddingBottom='10px'>
+          <FormControl isRequired paddingBottom='10px'>
             <FormLabel>First Name</FormLabel>
-            <Input
-              type='text'
-              {...register('firstName', {
-                required: {
-                  value: true,
-                  message: 'Please enter your first name'
-                }
-              })}
-              color='white'
-            />
-            {errors.firstName && <FormErrorMessage>{errors.firstName.message}</FormErrorMessage>}
+            <Input type='text' {...register('firstName')} color='white' />
           </FormControl>
-          <FormControl isInvalid={!!errors.lastName} isRequired paddingBottom='10px'>
+          <FormControl isRequired paddingBottom='10px'>
             <FormLabel>Last Name</FormLabel>
-            <Input
-              type='text'
-              {...register('lastName', {
-                required: {
-                  value: true,
-                  message: 'Please enter your last name'
-                }
-              })}
-              color='white'
-            />
-            {errors.lastName && <FormErrorMessage>{errors.lastName.message}</FormErrorMessage>}
+            <Input type='text' {...register('lastName')} color='white' />
           </FormControl>
         </HStack>
-        <FormControl isInvalid={!!errors.email} isRequired paddingBottom='10px'>
+        <FormControl isRequired paddingBottom='10px'>
           <FormLabel>Email Address</FormLabel>
-          <Input
-            type='email'
-            {...register('email', {
-              required: {
-                value: true,
-                message: 'Please enter your email address'
-              }
-            })}
-            color='white'
-          />
-          {errors.email && <FormErrorMessage>{errors.email.message}</FormErrorMessage>}
+          <Input type='email' {...register('email')} color='white' />
         </FormControl>
-        <FormControl isInvalid={!!errors.message} isRequired paddingBottom='10px'>
+        <FormControl isRequired paddingBottom='10px'>
           <FormLabel>Message</FormLabel>
           <Textarea type='text' {...register('message')} color='white' />
           {errors.message && <FormErrorMessage>{errors.message.message}</FormErrorMessage>}

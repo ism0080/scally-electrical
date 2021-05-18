@@ -39,13 +39,11 @@ export const chakraTheme = extendTheme({
     },
     Input: {
       defaultProps: {
-        color: 'blue.500',
         focusBorderColor: '#F2994A'
       }
     },
     Textarea: {
       defaultProps: {
-        color: theme.colors.white,
         focusBorderColor: '#F2994A'
       }
     }

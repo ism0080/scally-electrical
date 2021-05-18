@@ -10,6 +10,20 @@ type FormValues = {
   message: string
 }
 
+type FormSubmitData = {
+  name: string
+  email: string
+  message: string
+}
+
+const createFormData = (data: FormValues): FormSubmitData => {
+  return {
+    name: `${data.firstName} ${data.lastName}`,
+    email: data.email,
+    message: data.message
+  }
+}
+
 export const ContactForm = () => {
   const [isLoading, setLoading] = useState<boolean>(false)
   const [submitMessage, setSubmitMessage] = useState<string | null>(null)
@@ -24,12 +38,13 @@ export const ContactForm = () => {
   const onSubmit = (data: FormValues, e: any) => {
     setLoading(true)
     e.preventDefault()
+    const values = createFormData(data)
+    console.log(values)
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
-        'form-name': 'contact',
-        ...data
+        ...values
       })
     })
       .then((response) => {
@@ -49,6 +64,7 @@ export const ContactForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} name='contact' method='POST' data-netlify='true' data-netlify-honeypot='bot-field' action='/'>
+        <input type='hidden' name='contact' value='contact' />
         {submitMessage && <Text color='web.primary'>{submitMessage}</Text>}
         <HStack>
           <FormControl isInvalid={!!errors.firstName} isRequired paddingBottom='10px'>

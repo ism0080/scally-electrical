@@ -1,27 +1,12 @@
-import { Box, FormControl, FormLabel, Input, FormErrorMessage, HStack, Textarea, Button, Text } from '@chakra-ui/react'
+import { Box, Button, Popover, PopoverArrow, PopoverContent, PopoverHeader, PopoverTrigger, Center } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { encode } from '../../business/functions/encode'
 
 type FormValues = {
-  firstName: string
-  lastName: string
-  email: string
-  message: string
-}
-
-type FormSubmitData = {
   name: string
   email: string
   message: string
-}
-
-const createFormData = (data: FormValues): FormSubmitData => {
-  return {
-    name: `${data.firstName} ${data.lastName}`,
-    email: data.email,
-    message: data.message
-  }
 }
 
 export const ContactForm = () => {
@@ -35,29 +20,23 @@ export const ContactForm = () => {
     searchParams.delete('success')
   }, [])
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm<FormValues>()
+  const { register, handleSubmit, reset } = useForm<FormValues>()
 
   const onSubmit = (data: FormValues, e: any) => {
     setLoading(true)
-    const values = createFormData(data)
     e.preventDefault()
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
-        'form-name': 'contact',
-        ...values
+        ...data
       })
     })
-      .then((response) => {
+      .then(() => {
         reset()
         setLoading(false)
         setSubmitMessage('Thank you, we will be in touch')
+        setTimeout(() => setSubmitMessage(null), 3000)
       })
       .catch((error) => {
         reset()
@@ -68,23 +47,33 @@ export const ContactForm = () => {
   }
 
   return (
-    <Box>
-      <form name='contact' action='/' method='POST' data-netlify='true'>
+    <Box width={{ sm: '90%', lg: '400px' }}>
+      <form onSubmit={handleSubmit(onSubmit)} name='contact' action='/' method='POST' data-netlify='true'>
         <input type='hidden' name='form-name' value='contact' />
         <p>
           <label htmlFor='name'>Name:</label>
-          <input type='text' name='name' id='name' required />
+          <input type='text' {...register('name')} id='name' required />
         </p>
         <p>
-          <label htmlFor='email'>Email: </label> <input type='email' name='email' id='email' required />
+          <label htmlFor='email'>Email: </label> <input type='email' {...register('email')} id='email' required />
         </p>
         <p>
           <label htmlFor='message'>Message: </label>
-          <textarea name='message' id='message' required></textarea>
+          <textarea {...register('message')} id='message' required></textarea>
         </p>
-        <Button type='submit' isLoading={isLoading} loadingText='Submitting' color='white'>
-          Submit
-        </Button>
+        <Popover isOpen={!!submitMessage} placement='bottom' autoFocus={false}>
+          <PopoverContent bg='web.primary' color='white' border='none'>
+            <PopoverArrow bg='web.primary' />
+            <Center>
+              <PopoverHeader borderBottomWidth='0px'>{submitMessage}</PopoverHeader>
+            </Center>
+          </PopoverContent>
+          <PopoverTrigger>
+            <Button type='submit' isLoading={isLoading} loadingText='Submitting' color='white'>
+              Submit
+            </Button>
+          </PopoverTrigger>
+        </Popover>
         <style jsx>{`
           label {
             font-size: 1rem;

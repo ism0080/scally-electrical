@@ -13,13 +13,6 @@ export const ContactForm = () => {
   const [isLoading, setLoading] = useState<boolean>(false)
   const [submitMessage, setSubmitMessage] = useState<string | null>(null)
 
-  useEffect(() => {
-    const { searchParams } = new URL(window.location.toString())
-    const success = searchParams.get('success') || ''
-    console.log(success)
-    searchParams.delete('success')
-  }, [])
-
   const { register, handleSubmit, reset } = useForm<FormValues>()
 
   const onSubmit = (data: FormValues, e: any) => {
@@ -43,7 +36,6 @@ export const ContactForm = () => {
         reset()
         setLoading(false)
         setSubmitMessage('Opps something went wrong')
-        console.log(error)
       })
   }
 

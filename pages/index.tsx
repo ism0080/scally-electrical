@@ -1,11 +1,18 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Center } from '@chakra-ui/react'
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import { GApageView, GAtiming } from '../src/common'
 import { Contact, Jumbotron, NavBar } from '../src/components'
 
 export default function Home() {
+  useEffect(() => {
+    GApageView('Home')
+    const currentTime = new Date().getMilliseconds()
+    GAtiming('Timing', 'HomePage_render', new Date().getMilliseconds() - currentTime)
+  })
   return (
-    <Box paddingBottom='40px'>
+    <Center flexDirection='column' paddingBottom='40px'>
       <Head>
         <title>Scally Electrical, Canterbury NZ</title>
         <meta
@@ -17,11 +24,17 @@ export default function Home() {
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
         <link rel='manifest' href='/site.webmanifest' />
         <meta name='theme-color' content='#000000' />
+        <meta property='og:title' content='Scally Electrical' />
+        <meta property='og:image' content='/scally_electrical_og.png' />
       </Head>
-      <NavBar />
-      <Jumbotron />
-      <Box height={{ base: '40px', sm: '40px', lg: '0' }} />
-      <Contact />
-    </Box>
+      <Box alignSelf={{ base: 'center', sm: 'center', lg: 'flex-start' }} paddingLeft='20px'>
+        <NavBar />
+      </Box>
+      <Box>
+        <Jumbotron />
+        <Box height={{ base: '40px', sm: '40px', lg: '0' }} />
+        <Contact />
+      </Box>
+    </Center>
   )
 }

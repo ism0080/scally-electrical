@@ -1,10 +1,14 @@
-import { extendTheme, theme } from '@chakra-ui/react'
+import { extendTheme, textDecoration, theme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 
 const breakpoints = createBreakpoints({
+  // sm: '360px',
+  // md: '375px',
+  // lg: '980px',
+  // xl: '1020px'
   sm: '360px',
-  md: '375px',
-  lg: '768px',
+  md: '760px',
+  lg: '1020px',
   xl: '1020px'
 })
 
@@ -14,6 +18,16 @@ export const chakraTheme = extendTheme({
     Button: {
       defaultProps: {
         colorScheme: 'web.button'
+      }
+    },
+    Link: {
+      variants: {
+        textLink: {
+          _hover: { color: 'white' }
+        },
+        iconLink: {
+          _hover: { transform: 'scale(1.2)' }
+        }
       }
     },
     Heading: {

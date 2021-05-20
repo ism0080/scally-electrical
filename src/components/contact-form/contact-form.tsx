@@ -1,5 +1,5 @@
 import { Box, Button, Popover, PopoverArrow, PopoverContent, PopoverHeader, PopoverTrigger, Center } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { encode } from '../../business/functions/encode'
 
@@ -67,31 +67,6 @@ export const ContactForm = () => {
             </Button>
           </PopoverTrigger>
         </Popover>
-        <style jsx>{`
-          label {
-            font-size: 1rem;
-            color: #fff;
-          }
-          input,
-          textarea {
-            width: 100%;
-            height: 40px;
-            border: none;
-            font-size: 1rem;
-            border-radius: 5px;
-            padding-left: 5px;
-          }
-          textarea {
-            height: 80px;
-          }
-          input:focus,
-          textarea:focus {
-            outline: none;
-          }
-          p {
-            padding-bottom: 10px;
-          }
-        `}</style>
       </form>
     </Box>
   )

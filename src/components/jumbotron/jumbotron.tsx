@@ -2,7 +2,6 @@ import { Box, Flex, Heading, Stack, Link, Text, useMediaQuery } from '@chakra-ui
 import { CgFacebook, CgMail } from 'react-icons/cg'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-// import { useMediaQuery } from '../../business/hooks'
 
 import { GAevent } from '../../common'
 

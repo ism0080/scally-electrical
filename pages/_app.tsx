@@ -5,6 +5,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { chakraTheme } from '../src/theme'
 import { initGA } from '../src/common'
 
+import '../styles/global.css'
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     initGA()

@@ -1,7 +1,8 @@
 import { Box, Flex, Heading, Stack, Link, Text, useMediaQuery } from '@chakra-ui/react'
 import { CgFacebook, CgMail } from 'react-icons/cg'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+// import { useMediaQuery } from '../../business/hooks'
 
 import { GAevent } from '../../common'
 
@@ -9,7 +10,14 @@ export const Jumbotron = () => {
   const clickHandler = (action: string, iconName: string) => {
     GAevent('Contact', `${action} ${iconName} Icon`)
   }
-  const [isSmallerScreen] = useMediaQuery('(min-width: 1020px)')
+  const [isNotMobile, setNotIsMobile] = useState(false)
+  const [mediaQuery] = useMediaQuery('(min-width: 1020px)')
+
+  useEffect(() => {
+    if (mediaQuery !== isNotMobile) {
+      setNotIsMobile(mediaQuery)
+    }
+  }, [mediaQuery])
 
   return (
     <Box>
@@ -35,7 +43,7 @@ export const Jumbotron = () => {
         </Box>
         <Box width='100px' />
         <Box position={{ base: 'relative', sm: 'relative', lg: 'unset' }} opacity={{ base: '30%', sm: '30%', lg: '100%' }}>
-          <Image src='/banner_image.png' width={isSmallerScreen ? '500px' : '800px'} height='300px' objectFit='cover' />
+          <Image src='/banner_image.png' width={isNotMobile ? '500px' : '800px'} height='300px' objectFit='cover' />
         </Box>
       </Flex>
     </Box>

@@ -2,11 +2,12 @@ import { Box, Center } from '@chakra-ui/react'
 import Head from 'next/head'
 import React, { useEffect } from 'react'
 
-import { GApageView, GAtiming } from '../src/common'
+import { initGA, GApageView, GAtiming } from '../src/common'
 import { Contact, Jumbotron, NavBar } from '../src/components'
 
 export default function Home() {
   useEffect(() => {
+    initGA()
     GApageView('Home')
     const currentTime = new Date().getMilliseconds()
     GAtiming('Timing', 'HomePage_render', new Date().getMilliseconds() - currentTime)

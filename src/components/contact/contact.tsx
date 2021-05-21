@@ -6,7 +6,7 @@ import { GAevent } from '../../common'
 
 export const Contact = () => {
   const clickHandler = (action: string, iconName: string) => {
-    GAevent('Contact', `${action} ${iconName} Icon`)
+    GAevent('Contact', `${action} ${iconName} Link`)
   }
   return (
     <Stack align='center' justifyContent='space-evenly' direction={['column', 'column', 'column', 'column', 'row']}>

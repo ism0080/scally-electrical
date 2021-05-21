@@ -5,6 +5,7 @@ import { encode } from '../../business/functions/encode'
 
 type FormValues = {
   name: string
+  phone: string
   email: string
   message: string
 }
@@ -49,6 +50,9 @@ export const ContactForm = () => {
         </p>
         <p>
           <label htmlFor='email'>Email: </label> <input type='email' {...register('email')} id='email' required />
+        </p>
+        <p>
+          <label htmlFor='phone'>Phone: </label> <input type='text' {...register('phone')} id='phone' required />
         </p>
         <p>
           <label htmlFor='message'>Message: </label>

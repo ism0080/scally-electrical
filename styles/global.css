@@ -17,6 +17,7 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
+  border: 2px solid #F2994A;
 }
 p {
   padding-bottom: 10px;

@@ -66,6 +66,12 @@ export const chakraTheme = extendTheme({
     global: {
       body: {
         bg: theme.colors.black
+      },
+      input: {
+        paddingLeft: '5px'
+      },
+      textArea: {
+        paddingLeft: '5px'
       }
     }
   },

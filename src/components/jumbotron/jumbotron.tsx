@@ -42,7 +42,7 @@ export const Jumbotron = () => {
         </Box>
         <Box width='100px' />
         <Box position={{ base: 'relative', sm: 'relative', lg: 'unset' }} opacity={{ base: '30%', sm: '30%', lg: '100%' }}>
-          <Image src='/banner_image.png' width={isNotMobile ? '500px' : '800px'} height='300px' objectFit='cover' priority={true} />
+          <img src='/banner_image.png' style={{objectFit: 'cover', width: isNotMobile ? '500px' : '800px', height: '300px'}} />
         </Box>
       </Flex>
     </Box>

@@ -1,14 +1,19 @@
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import Head from 'next/head'
 
-import { chakraTheme } from '../src/theme'
+import { TrackingProvider } from '@/contexts/ga-trackers'
 
 import '../styles/global.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <ChakraProvider theme={chakraTheme}>
-    <Component {...pageProps} />
-  </ChakraProvider>
+  <>
+    <Head>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    </Head>
+    <TrackingProvider>
+      <Component {...pageProps} />
+    </TrackingProvider>
+  </>
 )
 
 export default MyApp

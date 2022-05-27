@@ -1,7 +1,10 @@
-import { Box, Button, Popover, PopoverArrow, PopoverContent, PopoverHeader, PopoverTrigger, Center } from '@chakra-ui/react'
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { encode } from '../../business/functions/encode'
+
+import { encode } from '@/utils/encode'
+
+import { Spinner } from '../loader/spinner'
 
 type FormValues = {
   name: string
@@ -41,37 +44,31 @@ export const ContactForm = () => {
   }
 
   return (
-    <Box width={{ sm: '90%', lg: '400px' }}>
-      <form onSubmit={handleSubmit(onSubmit)} name='contact' action='/' method='POST' data-netlify='true'>
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)} data-netlify-recaptcha='true' name='contact' action='/' method='POST' data-netlify='true'>
         <input type='hidden' name='form-name' value='contact' />
-        <p>
-          <label htmlFor='name'>Name:</label>
-          <input type='text' {...register('name')} id='name' required />
-        </p>
-        <p>
-          <label htmlFor='email'>Email: </label> <input type='email' {...register('email')} id='email' required />
-        </p>
-        <p>
-          <label htmlFor='phone'>Phone: </label> <input type='text' {...register('phone')} id='phone' required />
-        </p>
-        <p>
-          <label htmlFor='message'>Message: </label>
-          <textarea {...register('message')} id='message' required></textarea>
-        </p>
-        <Popover isOpen={!!submitMessage} placement='bottom' autoFocus={false}>
-          <PopoverContent bg='web.primary' color='white' border='none'>
-            <PopoverArrow bg='web.primary' />
-            <Center>
-              <PopoverHeader borderBottomWidth='0px'>{submitMessage}</PopoverHeader>
-            </Center>
-          </PopoverContent>
-          <PopoverTrigger>
-            <Button type='submit' isLoading={isLoading} loadingText='Submitting' color='white'>
-              Submit
-            </Button>
-          </PopoverTrigger>
-        </Popover>
+        <label htmlFor='name' className='sr-only'>
+          Name:
+        </label>
+        <input className='mb-4 py-4 px-3 leading-tight' type='text' placeholder='Name*' {...register('name')} id='name' required />
+        <label htmlFor='email' className='sr-only'>
+          Email:
+        </label>
+        <input className='mb-4 py-4 px-3 leading-tight' placeholder='Email*' type='email' {...register('email')} id='email' required />
+        <label htmlFor='phone' className='sr-only'>
+          Phone:
+        </label>
+        <input className='mb-4 py-4 px-3 leading-tight' placeholder='Phone*' type='text' {...register('phone')} id='phone' required />
+        <label htmlFor='message' className='sr-only'>
+          Message:
+        </label>
+        <textarea placeholder='Message*' className='py-4 px-3 leading-tight' {...register('message')} id='message' required />
+        <div data-netlify-recaptcha='true' />
+        <button className='m-4 ml-0 rounded-md bg-brand px-4 py-2' type='submit' style={{ transition: 'all .5s ease-in-out' }}>
+          {isLoading ? <Spinner /> : 'Submit'}
+        </button>
+        <p className='text-brand'>{submitMessage}</p>
       </form>
-    </Box>
+    </div>
   )
 }

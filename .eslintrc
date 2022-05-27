@@ -1,0 +1,113 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended", // Specify rules for React
+    "plugin:react-hooks/recommended", // Specify rules for React hooks
+    "plugin:@typescript-eslint/recommended", // Specify rules for Typescript
+    "plugin:prettier/recommended", // Specify rules for Prettier
+    "airbnb",
+    "prettier",
+    "plugin:testing-library/react",
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021, // The version of ECMAScript you are using
+    "sourceType": "module", // Enables ECMAScript modules
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["react", "@typescript-eslint", "react-hooks"],
+  "settings": {
+    "react": { "version": "detect" },
+    "import/resolver": {
+      "typescript": {},
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["off"],
+    "@typescript-eslint/no-empty-function": ["off"],
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "react/react-in-jsx-scope": "off",
+    "no-use-before-define": "off",
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "sort-imports": "off",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/prefer-default-export": "off",
+    "react/prop-types": "off",
+    "arrow-body-style": ["error", "as-needed"],
+    "prefer-arrow-callback": "error",
+    "react/jsx-no-useless-fragment": "error",
+    "react/require-default-props": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "react/destructuring-assignment": "off",
+    "react/no-array-index-key": "warn",
+    "no-param-reassign": "off",
+    "react/jsx-no-bind": [
+      "error",
+      {
+        "ignoreDOMComponents": false,
+        "ignoreRefs": true,
+        "allowArrowFunctions": true,
+        "allowFunctions": false,
+        "allowBind": true
+      }
+    ],
+    "no-extra-semi": "warn",
+    "padding-line-between-statements": [
+      "error",
+      // Requires blank lines before all return statements
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      // Requires blank lines after every sequence of variables
+      { "blankLine": "always", "prev": ["const", "let"], "next": "*" },
+      { "blankLine": "any", "prev": ["const", "let"], "next": ["const", "let"] },
+      // Requires blank lines between clauses in switch statements
+      { "blankLine": "always", "prev": ["case", "default"], "next": "*" }
+    ],
+    "import/no-duplicates": "error",
+    "no-console": "warn", // Disallow the use of console commands
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object"],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ]
+  }
+}

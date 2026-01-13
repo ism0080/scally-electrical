@@ -1,5 +1,3 @@
-import { event as trackEvent } from 'onedollarstats';
-
 import { Button } from './ui/button';
 import { Field, FieldGroup, FieldLabel } from './ui/field';
 import { Input } from './ui/input';
@@ -11,8 +9,6 @@ export default function ContactForm() {
 
         const myForm = event.target;
         const formData = new FormData(myForm);
-
-        trackEvent('form-submission', { label: 'Contact Query' });
 
         fetch('/', {
             method: 'POST',
@@ -83,7 +79,12 @@ export default function ContactForm() {
                         required
                     />
                     <div data-netlify-recaptcha="true" />
-                    <Button type="submit" variant="default" className="w-fit">
+                    <Button
+                        data-s-event="form-submission"
+                        type="submit"
+                        variant="default"
+                        className="w-fit"
+                    >
                         Submit
                     </Button>
                 </FieldGroup>

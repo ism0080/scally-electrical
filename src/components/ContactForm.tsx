@@ -1,19 +1,7 @@
-import { useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '../store';
-import { toast, Toaster } from 'sonner';
 import { Button } from './ui/button';
-import { Spinner } from './ui/spinner';
 import { Field, FieldGroup, FieldLabel } from './ui/field';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-
-type FormValues = {
-    name: string;
-    phone: string;
-    email: string;
-    message: string;
-};
 
 export default function ContactForm() {
     const handleSubmit = (event: any) => {
@@ -25,46 +13,14 @@ export default function ContactForm() {
         fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            // @ts-expect-error Type mismatch
             body: new URLSearchParams(formData).toString()
         })
-            .then(() => toast.success('Thank you, we will be in touch!'))
+            .then(() => console.log('Thank you, we will be in touch!'))
             .catch(() =>
-                toast.error('Opps something went wrong. Please try again.')
+                console.error('Opps something went wrong. Please try again.')
             );
     };
-
-    // const mutation = useMutation(
-    //     {
-    //         mutationFn: async (data: FormValues) => {
-    //             const body = encodeForm({
-    //                 'form-name': 'contact',
-    //                 ...data
-    //             });
-
-    //             const res = await fetch('/netlify-form.html', {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/x-www-form-urlencoded'
-    //                 },
-    //                 body
-    //             });
-    //             if (!res.ok) throw new Error('Form submission failed');
-    //             return res;
-    //         },
-    //         onError: () => {
-    //             toast.error('Opps something went wrong. Please try again.');
-    //         },
-    //         onSuccess: () => {
-    //             toast.success('Thank you, we will be in touch!');
-    //             reset();
-    //         }
-    //     },
-    //     queryClient
-    // );
-
-    // const onSubmit = (data: FormValues) => {
-    //     mutation.mutate(data);
-    // };
 
     return (
         <div>
@@ -128,7 +84,6 @@ export default function ContactForm() {
                     </Button>
                 </FieldGroup>
             </form>
-            <Toaster position="bottom-left" />
         </div>
     );
 }

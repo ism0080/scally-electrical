@@ -22,7 +22,7 @@ export default function ContactForm() {
         const myForm = event.target;
         const formData = new FormData(myForm);
 
-        fetch('/netlify-form.html', {
+        fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams(formData).toString()
@@ -72,11 +72,11 @@ export default function ContactForm() {
                 onSubmit={handleSubmit}
                 data-netlify-recaptcha="true"
                 data-netlify-honeypot="bot-field"
-                name="contact"
+                name="queries"
                 data-netlify="true"
             >
                 <FieldGroup>
-                    <input type="hidden" name="form-name" value="contact" />
+                    <input type="hidden" name="form-name" value="queries" />
                     <Field>
                         <FieldLabel htmlFor="name" className="sr-only">
                             Name:

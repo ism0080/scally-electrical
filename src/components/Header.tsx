@@ -1,3 +1,4 @@
+import { event } from 'onedollarstats';
 import { PhoneIcon, MessageCircle } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -10,13 +11,23 @@ export default function Header() {
                 </h1>
                 <div className="flex gap-2 w-full sm:w-auto justify-center mt-8 sm:mt-0">
                     <a href="tel:0274324978">
-                        <Button variant="default">
+                        <Button
+                            variant="default"
+                            onClick={() => event('call-now')}
+                        >
                             <PhoneIcon className="size-5 text-black" />
                             Call Now
                         </Button>
                     </a>
-                    <a href="https://m.me/scallyelectrical">
-                        <Button variant="default">
+                    <a
+                        href="https://m.me/scallyelectrical"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <Button
+                            variant="default"
+                            onClick={() => event('message-now')}
+                        >
                             <MessageCircle className="size-5 text-black" />
                         </Button>
                     </a>

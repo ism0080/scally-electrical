@@ -20,6 +20,15 @@ import '../styles/global.css';
             content="At Scally Electrical, we proudly serve the Canterbury region for all your electrical service needs"
         />
         <title>Home | Scally Electrical | Canterbury New Zealand</title>
+        <script>
+            import { configure } from 'onedollarstats';
+
+            if (typeof window !== 'undefined') {
+                configure({
+                    trackLocalhostAs: 'scallyelectrical.co.nz'
+                });
+            }
+        </script>
     </head>
     <body>
         <slot />

@@ -1,3 +1,4 @@
+import { event } from 'onedollarstats';
 import { CgFacebook, CgMail } from 'react-icons/cg';
 
 export default function Jumbotron() {
@@ -12,7 +13,14 @@ export default function Jumbotron() {
                     Maintenance work
                 </p>
                 <div className="mb-4 flex gap-2">
-                    <a href="https://www.facebook.com/scallyelectrical">
+                    <a
+                        href="https://www.facebook.com/scallyelectrical"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() =>
+                            event('facebook-visit', { label: 'Facebook' })
+                        }
+                    >
                         <CgFacebook size="23" className="hover:text-white/80" />
                     </a>
                     <a href="mailto:scallyelectrical@xtra.co.nz">

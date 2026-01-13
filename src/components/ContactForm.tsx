@@ -30,7 +30,7 @@ export default function ContactForm() {
                     ...data
                 });
 
-                const res = await fetch('/', {
+                const res = await fetch('/favicon.ico', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
